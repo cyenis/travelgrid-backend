@@ -19,6 +19,7 @@ const configurePassport = require('./config/passport');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const tips = require('./routes/tips');
+const cityApi = require('./routes/cityapi');
 
 
 //App
@@ -93,6 +94,7 @@ app.use(express.static("public"));
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/tips', tips);
+app.use('/cityapi', cityApi);
 
 
 // catch 404 and forward to error handler

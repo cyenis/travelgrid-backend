@@ -23,6 +23,10 @@ username: {
     type: String
     // required: [true, "Email can't be empty"]
   },
+  picture: {
+    type: String,
+    default: 'http://sguru.org/wp-content/uploads/2017/06/cool-anonymous-profile-pictures-1699946_orig.jpg'
+  },
   about: {
     type: String,
     // required: [true, 'About is required']
@@ -60,7 +64,7 @@ UserSchema.methods.asData = function () {
     email: this.email,
     firstName: this.firstName,
     lastName: this.lastName,
-    
+    picture: this.picture
   };
 };
 
