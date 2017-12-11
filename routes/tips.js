@@ -29,13 +29,9 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-// creates and saves the new tip
+// CREATE and SAVE a new tip
 router.post('/add', (req, res, next) => {
-  console.log("body", req.body);
-  console.log("file", req.file);
-
- 
-  
+   
   const user = req.user;
 
   const tipInfo = {
@@ -44,6 +40,7 @@ router.post('/add', (req, res, next) => {
     postStatus: req.body.postStatus,
     picture: req.body.filename,
     location: req.body.location,
+    destination: req.body.destination,
     user_id: user._id,
   };
 
@@ -56,7 +53,7 @@ router.post('/add', (req, res, next) => {
       return;
     }
 
-    res.json({message: 'Published'});
+    res.json(newTip);
   });
 });
 
