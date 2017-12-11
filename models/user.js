@@ -51,10 +51,33 @@ username: {
     type: String,
     // required: [true, ' is required']
   },
+  user_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   traveledTo: {
     type: String,
     // required: [true, ' is required']
-  }
+  },
+  connections: [
+    {
+      date: {
+        type: Date,
+        default: Date.now
+      },
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
+      status: {
+        type: String,
+        deafault: "pending",
+        enum: ["pending", "accepted", "rejected"]
+      },
+      message: String,
+      reply: String
+    }
+  ]
 });
 
 UserSchema.methods.asData = function () {

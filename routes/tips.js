@@ -7,27 +7,41 @@ const upload = require("../config/multer");
 // const enums = require('../models/enums/enums');
 
 
+
 // GET ALL TIPS
 router.get('/', function (req, res, next) {
-  Tip.find({}, (err, data) => {
-    if (err) {
-      return next(err); // to not show the error in the frontend
-    }
-    return res.json(data);
-  });
+  Tip.find({}).populate({
+      path: " user_id",
+      model: "User"
+    })
+    .exec((err, data) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(data);
+      }
+    });
 });
 
-//Get Tip
+
+//Get one Tip
 router.get("/:id", (req, res, next) => {
-  const flatid = req.params.id;
-  Flat.findOne({ _id: `${tipid}` }, (err, data) => {
-    if (err) {
-      return next(err);
-      console.log(flatid);
-    }
-    res.json(data);
-  });
+  const tipid = req.params.id;
+  Tip.findOne({ _id: `${tipid}` })
+    .populate({
+      path: " user_id",
+      model: "User"
+    })
+    .exec((err, data) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(data);
+      }
+    });
 });
+
+
 
 // CREATE and SAVE a new tip
 router.post('/add', (req, res, next) => {
