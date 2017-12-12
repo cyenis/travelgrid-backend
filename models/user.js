@@ -24,9 +24,8 @@ username: {
     // required: [true, "Email can't be empty"]
   },
   picture: {
-    type: String,
-    default: 'http://sguru.org/wp-content/uploads/2017/06/cool-anonymous-profile-pictures-1699946_orig.jpg'
-  },
+    type: String
+    },
   about: {
     type: String,
     // required: [true, 'About is required']

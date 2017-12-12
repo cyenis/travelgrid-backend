@@ -96,20 +96,16 @@ router.post('/signup', (req, res, next) => {
 router.put('/me', (req, res, next) => {
   
 
-  const {
-    email,
-    firstName,
-    lastName,
-    picture
-  } = req.body;
+const newInfo = {
+  firstName: req.body.firstName,
+  lastName: req.body.lastName,
+  email: req.body.email,
+  picture: req.body.picture
+};
 
-  const newProfile = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email
-  };
+
   
-     User.findOneAndUpdate({ _id: req.user._id }, { $set: newProfile }, (err, user) => {
+     User.findOneAndUpdate({ _id: req.user._id }, { $set: newInfo }, (err, user) => {
     if (err) {
       return next(err);
     }
@@ -121,14 +117,10 @@ router.put('/me', (req, res, next) => {
     });
   });
 
-//UPLOAD PROFILE PAGE 
+//UPLOAD PROFILE PICTURE 
 
-router.post('/upload', upload.single('file'), (req, res, next) => {
-  const data = {
-    userFileName: `/uploads/${req.file.filename}`
-  };
-
-  return response.data(req, res, data);
+router.post("/upload", upload.single("file"), (req, res, next) => {
+  res.json({ filename: `/uploads/${req.file.filename}` });
 });
 
 //LOGOUT
