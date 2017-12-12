@@ -95,16 +95,24 @@ router.post('/signup', (req, res, next) => {
 //EDIT USER PROFILE
 router.put('/me', (req, res, next) => {
   
-    const userUpdate = {
-      pic_path: req.body.pic_path || req.user.pic_path,
-    };
+
+  const {
+    email,
+    firstName,
+    lastName,
+    picture
+  } = req.body;
+
+  const newProfile = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email
+  };
   
-    User.findByIdAndUpdate(req.user._id, userUpdate, {
-      new: true
-    }, (err, user) => {
-      if (err) {
-        return next(err);
-      }
+     User.findOneAndUpdate({ _id: req.user._id }, { $set: newProfile }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
       if (!user) {
         return response.notFound(req, res);
       }
