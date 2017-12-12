@@ -94,28 +94,27 @@ router.post('/signup', (req, res, next) => {
 
 //EDIT USER PROFILE
 router.put('/me', (req, res, next) => {
-  
 
-const newInfo = {
-  firstName: req.body.firstName,
-  lastName: req.body.lastName,
-  email: req.body.email,
-  picture: req.body.picture
-};
+  const newInfo = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    picture: req.body.picture
+  };
 
-
-  
-     User.findOneAndUpdate({ _id: req.user._id }, { $set: newInfo }, (err, user) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { $set: newInfo }, {new: true}, (err, user) => {
     if (err) {
       return next(err);
     }
-      if (!user) {
-        return response.notFound(req, res);
-      }
+    if (!user) {
+      return response.notFound(req, res);
+    }
+    req.login(user, (err) => {
       let data = user.asData();
       return response.data(req, res, data);
     });
   });
+});
 
 //UPLOAD PROFILE PICTURE 
 
