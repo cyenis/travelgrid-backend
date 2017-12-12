@@ -29,6 +29,11 @@ const TipSchema = new Schema({
     // required: [true, 'Content is required']
   },
 
+  categories: {
+    type: String,
+    enum: ["architecture", "art", "photography","culture","Design","sports"]
+  },
+
   user_id: {
     type: Schema.Types.ObjectId,
     ref: 'User'

@@ -12,52 +12,100 @@ username: {
   },
   firstName: {
     type: String,
-    // required: [true, 'firstName is required']
   },
  lastName: {
     type: String,
-    // required: [true, 'lastName is required']
-  }
-  ,
+  },
   email: {
     type: String
-    // required: [true, "Email can't be empty"]
   },
   picture: {
     type: String
     },
   about: {
     type: String,
-    // required: [true, 'About is required']
   },
   languages: {
     type: String,
-    // required: [true, ' is required']
+    enum: ["English", "Spanish", "Portugese", "French","Greek"]        
   },
   interests: {
     type: String,
-    // required: [true, ' is required']
+    enum: ["architecture", "art", "photography","culture","Design","sports"]
   },
   education: {
     type: String,
-    // required: [true, ' is required']
   },
-  livingIn: {
+
+  // user_id: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User'
+  // },
+
+
+
+  livingIn:
+   {
+    location: {
+      latitude: String,
+      longitude: String
+    },
+    placeName: {
     type: String,
-    // required: [true, ' is required']
   },
-  livedIn: {
+    link: {
+      type: String
+    },
+  },
+
+
+  cityBorn:
+  {
+   location: {
+     latitude: String,
+     longitude: String
+   },
+   placeName: {
+   type: String,
+ },
+   link: {
+     type: String
+   },
+ },
+
+
+
+ livedIn:  [{
+  location: {
+    latitude: String,
+    longitude: String
+  },
+  placeName: {
+  type: String,
+},
+  link: {
+    type: String
+  },
+}],
+
+
+
+
+  traveledTo:  [{
+    location: {
+      latitude: String,
+      longitude: String
+    },
+    placeName: {
     type: String,
-    // required: [true, ' is required']
   },
-  user_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  traveledTo: {
-    type: String,
-    // required: [true, ' is required']
-  },
+    link: {
+      type: String
+    },
+  }],
+
+
+
   connections: [
     {
       date: {
