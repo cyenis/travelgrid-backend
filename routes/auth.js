@@ -99,7 +99,9 @@ router.put('/me', (req, res, next) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    picture: req.body.picture
+    picture: req.body.picture,
+    livingIn: req.body.livingIn,
+    cityFrom: req.body.cityFrom
   };
 
   User.findOneAndUpdate({ _id: req.user._id }, { $set: newInfo }, {new: true}, (err, user) => {

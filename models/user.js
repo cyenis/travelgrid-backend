@@ -59,7 +59,7 @@ username: {
   },
 
 
-  cityBorn:
+  cityFrom:
   {
    location: {
      latitude: String,
@@ -134,7 +134,9 @@ UserSchema.methods.asData = function () {
     email: this.email,
     firstName: this.firstName,
     lastName: this.lastName,
-    picture: this.picture
+    picture: this.picture,
+    livingIn: this.livingIn,
+    cityFrom:this.cityFrom
   };
 };
 
