@@ -20,6 +20,7 @@ const auth = require('./routes/auth');
 const tips = require('./routes/tips');
 const cityApi = require('./routes/cityapi');
 const user = require('./routes/user');
+const chat = require('./routes/chat');
 
 
 //App
@@ -100,7 +101,9 @@ app.use('/', index);
 app.use('/auth', auth);
 app.use('/user', user);
 app.use('/tips', tips);
+app.use('/chat', chat);
 app.use('/cityapi', cityApi);
+
 
 
 
