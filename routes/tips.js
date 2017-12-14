@@ -54,7 +54,7 @@ router.post('/add', (req, res, next) => {
     postStatus: req.body.postStatus,
     picture: req.body.filename,
     location: req.body.location,
-    destination: req.body.destination,
+    city: req.body.city,
     user_id: user._id,
   };
 
@@ -88,5 +88,78 @@ router.post("/upload", upload.single("file"), (req, res, next) => {
 // router.get('/selectors', function (req, res, next) {
 //   res.json(enums);
 // });
+
+
+// Like a tip
+router.get('/:questionId/addQuestionStar', (req, res, next) => {
+  const questionId = req.params.questionId;
+  const questionUpdate = {
+    $inc: {
+      "stars": 1
+    }
+  };
+  Question.findByIdAndUpdate(questionId, questionUpdate, (err, question) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    if (questionUpdate.errors) {
+      return res.status(400).json(questionUpdate);
+    }
+    return res.json(questionUpdate);
+  });
+});
+
+// Add comment to tip
+// router.post('/:questionId/addanswer', (req, res, next) => {
+//   const questionId = req.params.questionId;
+
+//   var questionUpdate = {
+//     $push: {
+//       "answers": {
+//         content: req.body.content,
+//         stars: 0
+//       }
+//     }
+//   };
+
+//   Question.findByIdAndUpdate(questionId, questionUpdate, (err, question) => {
+//     if (err) {
+//       return res.status(500).json(err);
+//     }
+//     if (questionUpdate.errors) {
+//       return res.status(400).json(questionUpdate);
+//     }
+//     return res.json(questionUpdate);
+//   });
+// });
+
+// Get specific city tips
+router.get('/citytips/:id', (req, res, next) => {
+  Tip.find({
+    'city': req.params.id
+  }).populate('user_id').exec((err, tips) => {
+    if (err) {
+      return res.json(err).status(500);
+    }
+    return res.json(tips);
+  });
+});
+
+// Get specific user tips
+router.get('/usertips/:id', (req, res, next) => {
+  Tip.find({
+    'user_id': req.params.id
+  }).populate('user_id').exec((err, tips) => {
+    if (err) {
+      return res.json(err).status(500);
+    }
+    return res.json(tips);
+  });
+});
+
+
+
+
+
 
 module.exports = router;

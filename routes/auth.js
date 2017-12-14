@@ -116,6 +116,7 @@ router.put('/me', (req, res, next) => {
       return response.data(req, res, data);
     });
   });
+  
 });
 
 //UPLOAD PROFILE PICTURE 
@@ -151,6 +152,30 @@ router.get('/me', (req, res) => {
 //   });
 // });
 
+
+
+//EDIT USER PROFILE
+router.put('/follow', (req, res, next) => {
+  
+    const follow = {
+      following: req.body.user,
+    };
+  
+    User.findOneAndUpdate({ _id: req.user._id }, { $set: follow }, {new: true}, (err, user) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return response.notFound(req, res);
+      }
+      req.login(user, (err) => {
+        let data = user.asData();
+        return response.data(req, res, data);
+      });
+    });
+    
+  });
+  
 
 
 

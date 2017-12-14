@@ -7,7 +7,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
@@ -50,7 +49,12 @@ app.use(function(req, res, next) {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Credentials", true);
-  next();
+  if (req.method == 'OPTIONS') {
+    res.status(204).send();
+  }
+  else {
+    next();
+  }
 });
 
 

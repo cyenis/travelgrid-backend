@@ -47,8 +47,8 @@ username: {
   livingIn:
    {
     location: {
-      latitude: String,
-      longitude: String
+      latitude: Number,
+      longitude: Number
     },
     placeName: {
     type: String,
@@ -62,8 +62,8 @@ username: {
   cityFrom:
   {
    location: {
-     latitude: String,
-     longitude: String
+     latitude: Number,
+     longitude: Number
    },
    placeName: {
    type: String,
@@ -77,8 +77,8 @@ username: {
 
  livedIn:  [{
   location: {
-    latitude: String,
-    longitude: String
+    latitude: Number,
+    longitude: Number
   },
   placeName: {
   type: String,
@@ -93,8 +93,8 @@ username: {
 
   traveledTo:  [{
     location: {
-      latitude: String,
-      longitude: String
+      latitude: Number,
+      longitude: Number
     },
     placeName: {
     type: String,
@@ -104,6 +104,13 @@ username: {
     },
   }],
 
+  followers: {
+    type: Array,
+  },
+
+  following: {
+    type: Array,
+  },
 
 
   connections: [
@@ -136,7 +143,8 @@ UserSchema.methods.asData = function () {
     lastName: this.lastName,
     picture: this.picture,
     livingIn: this.livingIn,
-    cityFrom:this.cityFrom
+    cityFrom:this.cityFrom,
+    following:this.following
   };
 };
 

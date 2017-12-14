@@ -38,4 +38,20 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
+/* GET ONE USER LIVING IN */
+
+
+router.get('/city/:id', (req, res, next) => {
+  User.find({
+    'livingIn.placeName': req.params.id})
+    .populate('user_id').exec((err, users) => {
+    if (err) {
+      return res.json(err).status(500);
+    }
+    return res.json(users);
+  });
+});
+
+
+
 module.exports = router;

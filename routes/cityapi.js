@@ -34,7 +34,7 @@ router.get('/indices/:city', (req, res, next) => {
 
 // Get google photo reference for city
 router.get('/photoreference/:city', (req, res, next) => {
-  https.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.city}&key=AIzaSyBHkXsl7oyvinskwdVcnjeKJ3hMeCbD5eY`, (resp) => {
+  https.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.city}&key=AIzaSyDR3bs8bskPY1F7d0bFMvaiQ9J3s9bq16I`, (resp) => {
     let data = '';
     resp.on('data', (chunk) => {
       data += chunk;
@@ -49,7 +49,7 @@ router.get('/photoreference/:city', (req, res, next) => {
 
 // Use photo reference to retrieve city photo
 router.get('/photo/:photo', (req, res, next) => {
-  https.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=2000&photoreference=${req.params.photo}&key=AIzaSyBHkXsl7oyvinskwdVcnjeKJ3hMeCbD5eY`, (resp) => {
+  https.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=2000&photoreference=${req.params.photo}&key=AIzaSyDR3bs8bskPY1F7d0bFMvaiQ9J3s9bq16I`, (resp) => {
     res.json({
       location: resp.headers.location
     });

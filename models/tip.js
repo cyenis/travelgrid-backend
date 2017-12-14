@@ -24,7 +24,7 @@ const TipSchema = new Schema({
     longitude: String
     // required: [true, "Content can't be empty"]
   },
-  destination: {
+  city: {
     type: String,
     // required: [true, 'Content is required']
   },
