@@ -22,14 +22,19 @@ const cityApi = require('./routes/cityapi');
 const user = require('./routes/user');
 const chat = require('./routes/chat');
 
+const dotenv = require('dotenv');
+
 
 //App
 const app = express();
 
+dotenv.config();
+
+
 // -- Connect to database
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/travelgrid', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE,
   useMongoClient: true
@@ -43,7 +48,7 @@ mongoose.connect('mongodb://localhost/travelgrid', {
 // }));
 app.use(function(req, res, next) {
   //set headers to allow cross origin request.
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
