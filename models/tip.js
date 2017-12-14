@@ -20,8 +20,8 @@ const TipSchema = new Schema({
     // required: [true, 'Content is required']
   },
   location: {
-    latitude: String,
-    longitude: String
+    latitude: Number,
+    longitude: Number
     // required: [true, "Content can't be empty"]
   },
   city: {
